@@ -2,3 +2,10 @@ first line of implementation
 Implemented in feature abel branch
 Fixed a new bug
 Changed on 1Jan 2019
+
+
+DATE='\""'
+DATE+=`date.exe`
+DATE.delete!("\n")
+DATE+='"\"'
+
