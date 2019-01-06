@@ -16,7 +16,7 @@ time_var.delete!("\n")
 time_var+='"\"'
 TIME_CONST=time_var
 
-var_branch_name =
+
 var_branch_name='\""'
 var_branch_name+=`git branch -a | grep ^\* | cut -d " " -f2`
 var_branch_name.delete!("\n")
