@@ -2,13 +2,13 @@
 #include <string.h>
 //#include "module.h"
 
-#ifndef VAR
-#define VAR "INIT VAL"
+#ifndef GIT_BRANCH_NAME
+#define GIT_BRANCH_NAME "INIT VAL"
 #endif
 
 int main () {
     printf("Running main\n");
-    printf("VAR: %s \n",VAR);
+    printf("Compile started at: %s \n",VAR);
     printf("GIT Branch name: %s \n",GIT_BRANCH_NAME);
     printf("GIT Branch HASH: %s \n",GIT_BRANCH_HASH);
   //  module_run();
