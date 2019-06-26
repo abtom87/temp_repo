@@ -6,14 +6,6 @@ new change in readme
 Changed READMe on Jan1,2019
 
 
-/*
- * test.c
- *
- *  Created on: Jun 12, 2019
- *      Author: abel
- */
-
-#include <stdio.h>
 
 #define u8 unsigned char
 #define u32 unsigned long
@@ -112,9 +104,9 @@ int string_to_MAC(char* MAC_String , u8* MAC_Addr, MAC_Addr_Struct* a_MAC_Addr )
 			u32 lsb_mac=0;
 			u32 usb_mac=0;
 			int i=0;
-			int ret_status=0;
-			char tmp_mac[17] = {0};
-
+			int ret_status      =  0;
+			char tmp_mac[17]    = {0};
+			char u8_MAC_Addr[6] = {0};
 			printf("MACSTRING Len: %d \n", strlen(MAC_String));
 
 		    // Exit if the String length is incorrect OR if char pointer is NULL
@@ -130,24 +122,43 @@ int string_to_MAC(char* MAC_String , u8* MAC_Addr, MAC_Addr_Struct* a_MAC_Addr )
 //			1 5-1
 //			0 5-0
 
-		    for(int j = strlen(MAC_String) - 1 ; j >= 0; j--)
-		    {
-		    	tmp_mac[j] = MAC_String[MAC_OCTETS_COUNT-j];
-		    }
+//		    for(int j = strlen(MAC_String) - 1 ; j >= 0; j--)
+//		    {
+//		    	tmp_mac[j] = MAC_String[strlen(MAC_String)-j-1];
+//		    	printf("tmp_mac[%d]: %c\n",j,tmp_mac[j]);
+//		    }
+
 			ret_status = hwaddr_aton(MAC_String, MAC_Addr);
+
+//			for(int j = MAC_OCTETS_COUNT - 1 ; j >= 0; j--)
+//			{
+//				u8_MAC_Addr[j] = MAC_Addr[MAC_OCTETS_COUNT-j-1];
+//				printf("u8_MAC_Addr[%d]: 0x%02x\n",j,u8_MAC_Addr[j]);
+//
+//			}
+			u8_MAC_Addr[5] = MAC_Addr[4];
+			u8_MAC_Addr[4] = MAC_Addr[5];
+
+			for(i=0 ;i<=3;i++)
+			{
+				u8_MAC_Addr[3-i] = MAC_Addr[i];
+
+
+			}
 			printf("hwaddr_aton ret: %d\n", ret_status);
 			if( ret_status==0 ){
-			for (i = 0; i < 2; i++) {
-				usb_mac = (usb_mac << 8) | ((unsigned char) MAC_Addr[i]);
+			for (i = 4; i < 6; i++) {
+				usb_mac = (usb_mac << 8) | ((unsigned char) u8_MAC_Addr[i]);
 				a_MAC_Addr->MAC_upperbits = usb_mac;
 			}
-			printf("macStruct: 0x%08lx \n", a_MAC_Addr->MAC_upperbits);
+			printf("macStruct UB: 0x%08lx \n", a_MAC_Addr->MAC_upperbits);
 
-			for (i = 2; i < 6; i++) {
-			   	lsb_mac = (lsb_mac << 8) | ((unsigned char) MAC_Addr[i]);
+
+			for (i = 0; i < 4; i++) {
+			   	lsb_mac = (lsb_mac << 8) | ((unsigned char) u8_MAC_Addr[i]);
 			   	a_MAC_Addr->MAC_lowerbits = lsb_mac;
 			}
-			printf("macStruct: 0x%lx \n", a_MAC_Addr->MAC_lowerbits);
+			printf("macStruct LB: 0x%lx \n", a_MAC_Addr->MAC_lowerbits);
 			for (i=0;i<6;i++)
 			{
 				printf("\nMACADDR %d: 0x%x \n",i, MAC_Addr[i]);
@@ -157,11 +168,6 @@ int string_to_MAC(char* MAC_String , u8* MAC_Addr, MAC_Addr_Struct* a_MAC_Addr )
 			else
 				return -1;
 }
-
-
-
-
-
 int main(int argc, char *argv[])
 {
 
@@ -173,7 +179,7 @@ int main(int argc, char *argv[])
 
 	printf("Hello World\n");
 	printf("ARGV1 %s\n",argv[1]);
-	char mac_string[] = "12:13:72:73:74:75";
+	//char mac_string[] = "12:13:72:73:74:75";
 	//hwaddr_aton(mac_string, MAC_Addr );
      printf("\nMAIN Calling Strlen argv[1]: %d\n", calc_str_len(argv[1]));
 	//string_to_MAC(mac_string, MAC_Addr, &macStruct);
@@ -181,49 +187,5 @@ int main(int argc, char *argv[])
 	//printf("macStruct: 0x%d \n", macStruct.MAC_upperbits);
 	printf("macStruct UB: 0x%08lx \n", macStruct.MAC_upperbits);
 	printf("macStruct LB: 0x%08lx \n", macStruct.MAC_lowerbits);
-
-#if 0
-	hwaddr_aton(mac_string, MAC_Addr );
-
-
-	for(int i=0; i<8; i++)
-	{
-		printf("MAC_ADDRESS[%d]: 0x%x\n",i,MAC_Addr[i] );
-	}
-	u32 lsb_mac=0;
-	u32 usb_mac=0;
-	int i=0;
-	for (i = 0; i < 2; i++) {
-		usb_mac = (usb_mac << 8) | ((unsigned char) MAC_Addr[i]);
-	}
-    printf("usb_mac  0x%lx\n", usb_mac);
-
-    for (i = 2; i < 6; i++) {
-    	lsb_mac = (lsb_mac << 8) | ((unsigned char) MAC_Addr[i]);
-
-    }
-    printf("lsb_mac  0x%lx", lsb_mac);
-#endif
-#if 0
-
-	for(int i=0; i<8; i++)
-	{
-
-
-	printf("Argc %d\n", argc);
-	stringToOctets(mac_string, &mac_add);
-
-	for(int i=0; i<argc; i++)
-		printf("ArgV[%d] %s\n",i, argv[i]);
-
-	for(int i=0;i<MAC_OCTETS_COUNT;i++)
-	{
-	    //mac_add->octets[i].octet_value   = MAC_Addr[i] ;
-		printf("MAC_ADDR[%d]: 0x%x ", i, MAC_Addr[i] );
-		//printf("\nmac_add.octets[%d].octet_value : 0x%x ", i, mac_add->octets[i].octet_value);
-		printf("\nmac_add[%d]: 0x%x ", i, mac_add.octets[i].octet_value );
-	}
-#endif
-
 }
 
