@@ -189,3 +189,28 @@ int main(int argc, char *argv[])
 	printf("macStruct LB: 0x%08lx \n", macStruct.MAC_lowerbits);
 }
 
+
+
+
+
+
+
+
+
+volatile uint32_t *ICSR_Stat= (volatile uint32_t *)&(SCB->ICSR) ;
+//__attribute__( ( always_inline ) )
+
+ static inline uint8_t is_ISR_Pending(void){
+
+	if( (*ICSR_Stat >> SCB_ICSR_ISRPENDING_Pos) & 1UL )
+	{
+		return 1;
+	}
+
+	else {
+		return 0;
+	}
+
+}
+
+
