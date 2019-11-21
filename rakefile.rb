@@ -37,7 +37,7 @@ task :default => "test_app"
 task :clean do
     sh "clear; rm -rfv *.o"
 end
-
+asdasdas
 desc "Build the binary executable"
 file "test_app" => object_files do |task|
   sh  "gcc #{object_files} -o #{task.name} "
