@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <string.h>
+//#include "module.h"
+
+#ifndef GIT_BRANCH_NAME
+#define GIT_BRANCH_NAME "INIT VAL"
+#endif
+
+int main () {
+    printf("Running main\n");
+    printf("Compile started at: %s \n",VAR);
+    printf("GIT Branch name: %s \n",GIT_BRANCH_NAME);
+    printf("GIT Branch HASH: %s \n",GIT_BRANCH_HASH);
+  //  module_run();
+}
