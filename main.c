@@ -12,4 +12,6 @@ int main () {
     printf("GIT Branch name: %s \n",GIT_BRANCH_NAME);
     printf("GIT Branch HASH: %s \n",GIT_BRANCH_HASH);
   //  module_run();
+    printf("Changed on master on Nov 21 2019: %s \n",GIT_BRANCH_HASH);
+    
 }
