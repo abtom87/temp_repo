@@ -9,3 +9,4 @@ DATE+=`date.exe`
 DATE.delete!("\n")
 DATE+='"\"'
 
+sdfsdf
