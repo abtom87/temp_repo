@@ -47,3 +47,5 @@ end
 rule '.o' => '.c' do |task|
   sh "gcc -c #{task.source} -DVAR=#{TIME_CONST} -DGIT_BRANCH_NAME=#{BRANCH_NAME} -DGIT_BRANCH_HASH=#{BRANCH_HASH}"
 end
+
+asdasdas
