@@ -20,5 +20,7 @@ int main () {
       printf("Changed on master  on Nov 28 2019 at 13.09: %s \n",GIT_BRANCH_HASH);
     
     
+    printf("Changed on master  on Nov 28 2019 at 13.15: %s \n",GIT_BRANCH_HASH);
+    
     
 }
